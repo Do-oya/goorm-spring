@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz</title>
+</head>
+<body>
+<h1>Quiz</h1>
+<div th:if="${question != null}">
+    <form action="#" th:action="@{/quiz}" method="post">
+        <p th:text="${question.question}"></p>
+        <ul>
+            <li th:each="option, iterStat : ${question.options}">
+                <label>
+                    <input type="radio" name="answer" th:value="${iterStat.index}" required>
+                    <span th:text="${option}"></span>
+                </label>
+            </li>
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<div th:if="${question == null}">
+    <p>No more questions. <a th:href="@{/quiz-result}">View Results</a></p>
+</div>
+</body>
+</html>
